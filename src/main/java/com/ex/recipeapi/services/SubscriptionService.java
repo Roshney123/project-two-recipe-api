@@ -32,9 +32,20 @@ public class SubscriptionService {
 
     Logger logger = LoggerFactory.getLogger(SubscriptionController.class);
 
+    /**
+     * @return - all the subscribers from Subscription table
+     */
+
     public List <Subscription> getAllSubscribers() {
         return subscriptions.findAll();
     }
+
+    /**
+     * If a user wants to subscribe to Daily Email, this method will add the user into Subscription table
+     * @param userId - unique identifier for User
+     * @param s - Subscription entity
+     * @return - a string that tells whether or not Subscription is successful
+     */
 
     public String subscribeForDailyEmail (int userId, Subscription s) {
 
@@ -57,6 +68,12 @@ public class SubscriptionService {
         }
     }
 
+    /**
+     * If a user wants to unsubscribe from Daily Email, this method will remove the user from Subscription table
+     * @param userId - unique identifier for User
+     * @return - a string that tells whether or not Unsubscription is successful
+     */
+
     public String unsubscribeFromDailyEmail (int userId) {
 
         logger.info("SubscriptionService - unsubscribeFromDailyEmail");
@@ -78,6 +95,13 @@ public class SubscriptionService {
             return "Error deleting Subscription";
         }
     }
+
+    /**
+     * If a user requests to get the recipe in the moment, this method will send the recipe to his email
+     * @param userId - unique identifier for User
+     * @param recipeId - unique identifier for recipe from the API
+     * @return - a string that tells whether or not the email was sent successfully
+     */
 
     public String sendEmailForThisRecipe (int userId, int recipeId) {
 
@@ -118,6 +142,12 @@ public class SubscriptionService {
                 return "Successfully sent email with this recipe!";
             }
     }
+
+    /**
+     * User can get a particular recipe using recipe ID
+     * @param recipeId - unique identifier for recipe
+     * @return - a recipe with instructions and image
+     */
 
     public String getRecipeById(int recipeId) {
 
@@ -163,6 +193,12 @@ public class SubscriptionService {
 
         return (message);
     }
+
+    /**
+     * User can search for a recipe with the ingredients in hands
+     * @param ingredientsInHand - comma-separated string such as flour,egg,sugar
+     * @return - three recipes (title, ID, image, usedIngredientCount, missedIngredientCount) to choose from
+     */
 
     public String getRecipeByIngredients(String ingredientsInHand) {
 
