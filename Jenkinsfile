@@ -46,5 +46,19 @@ pipeline {
             }
         }
     }
+    stage('Docker Deliver') {
+        when {
+            // branch 'main' -- UPDATE
+            branch 'ft_jenkins'
+        }
+        steps{
+            script{
+                docker.withRegistry("", dockerHubCreds) {
+                    dockerImage.push("$currentBuild.number")
+                    dockerImage.push("latest")
+                }
+            }
+        }
+    }
   }
 }
