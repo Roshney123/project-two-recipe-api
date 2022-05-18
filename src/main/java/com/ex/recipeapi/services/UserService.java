@@ -92,7 +92,7 @@ public class UserService {
         System.out.println(user);
 
         if (user == null) {
-            throw new UserNotFoundException("User not found, Please Sign Up first");
+            throw new UserNotFoundException("User not found, please sign up");
         }
 
         if (user.getUserPassword().equals(loginDTO.getUserPassword())) {
