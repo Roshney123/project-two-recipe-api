@@ -8,14 +8,25 @@ pipeline {
     }
     stage('Unit Testing') {
         when {
-            // anyOf {branch 'ft_*'; branch 'bg_*'}
+            // anyOf {branch 'ft_*'; branch 'bg_*'} -- UPDATE
             branch 'ft_jenkins'
         }
         steps {
             withMaven {
                 sh 'mvn test'
             }
-            // junit skipPublishingChecks: true, testResults: 'target/surefire-reports/*.xml'
+            junit skipPublishingChecks: true, testResults: 'target/surefire-reports/*.xml'
+        }
+    }
+    stage('Build') {
+        when {
+            // branch 'main' -- UPDATE
+            branch 'ft_jenkins'
+        }
+        steps{
+            withMaven {
+                sh 'mvn package -DskipTests'
+            }
         }
     }
   }
