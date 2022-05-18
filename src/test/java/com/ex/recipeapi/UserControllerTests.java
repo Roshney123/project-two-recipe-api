@@ -40,7 +40,7 @@ public class UserControllerTests {
         mockUser.setIsLoggedIn(0);
 
         when(userService.addUser(any())).thenReturn(mockUser);
-        mockMvc.perform(post("/api/users")
+        mockMvc.perform(post("/signup")
                 .contentType("application/json")
                 .content("{\"email\": \"frank@gmail.com\", \"userPassword\": \"password\"}"))
                 .andExpect(status().isOk());
