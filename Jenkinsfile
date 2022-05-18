@@ -1,4 +1,9 @@
 pipeline {
+  environment {
+    registry = 'darylnauman/project2'
+    dockerHubCreds = 'docker_hub'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Test') {
@@ -26,6 +31,18 @@ pipeline {
         steps{
             withMaven {
                 sh 'mvn package -DskipTests'
+            }
+        }
+    }
+    stage('Docker Image') {
+        when {
+            // branch 'main' - UPDATE
+            branch 'ft_jenkins'
+        }
+        steps{
+            script {
+                echo "$registry:$currentBuild.number"
+                dockerImage = docker.build "$registry:$currentBuild.number"
             }
         }
     }
