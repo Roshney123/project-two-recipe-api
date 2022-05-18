@@ -117,7 +117,7 @@ public class UserServiceTests {
             userService.login(loginDTO1);
         });
 
-        Assertions.assertEquals("User not found", ex.getMessage(),
+        Assertions.assertEquals("User not found, please sign up", ex.getMessage(),
                 "Method did not throw when trying to login a user with an email that does not exist." );
     }
 
