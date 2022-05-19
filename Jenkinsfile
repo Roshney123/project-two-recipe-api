@@ -8,8 +8,8 @@ pipeline {
   stages {
     stage('Unit Testing') {
         when {
-            // anyOf {branch 'ft_*'; branch 'bg_*'} -- UPDATE
-            branch 'ft_jenkins'
+            anyOf {branch 'ft_*'; branch 'bg_*'}
+            // branch 'ft_jenkins'
         }
         steps {
             withMaven {
@@ -20,8 +20,8 @@ pipeline {
     }
     stage('Build') {
         when {
-            // branch 'main' -- UPDATE
-            branch 'ft_jenkins'
+            branch 'main'
+            // branch 'ft_jenkins'
         }
         steps{
             withMaven {
@@ -31,8 +31,8 @@ pipeline {
     }
     stage('Docker Image') {
         when {
-            // branch 'main' - UPDATE
-            branch 'ft_jenkins'
+            branch 'main'
+            // branch 'ft_jenkins'
         }
         steps{
             script {
@@ -43,8 +43,8 @@ pipeline {
     }
     stage('Docker Deliver') {
         when {
-            // branch 'main' -- UPDATE
-            branch 'ft_jenkins'
+            branch 'main'
+            // branch 'ft_jenkins'
         }
         steps{
             script{
@@ -57,8 +57,8 @@ pipeline {
     }
     stage('Wait for approval') {
         when {
-            // branch 'main'
-            branch 'ft_jenkins'
+            branch 'main'
+            // branch 'ft_jenkins'
         }
         steps {
             script {
