@@ -78,6 +78,10 @@ pipeline {
         }
     }
     stage('Deploy') {
+        when {
+            branch 'main'
+            // branch 'ft_jenkins'
+        }
         steps {
             echo 'Deploy'
         }
