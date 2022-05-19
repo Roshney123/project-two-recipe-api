@@ -11,7 +11,8 @@ spec:
       app: recipe-api
     template:
       metadata:
-        app: recipe-api
+        labels:
+          app: recipe-api
       spec:
         containers:
           - name: recpie-api-server
