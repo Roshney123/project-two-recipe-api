@@ -59,6 +59,7 @@ pipeline {
                 }
             }
         }
+    }
     stage('Wait for approval')
         when {
             // branch 'main'
@@ -80,6 +81,10 @@ pipeline {
             }
         }
         }
+    stage('Deploy') {
+        steps {
+            echo 'Deploy'
+        }
+    }
     }
   }
-}
