@@ -6,11 +6,6 @@ pipeline {
   }
   agent any
   stages {
-    stage('Test') {
-      steps {
-        sh 'echo "Hello, World! Recipe API"'
-      }
-    }
     stage('Unit Testing') {
         when {
             // anyOf {branch 'ft_*'; branch 'bg_*'} -- UPDATE
@@ -60,7 +55,7 @@ pipeline {
             }
         }
     }
-    stage('Wait for approval')
+    stage('Wait for approval') {
         when {
             // branch 'main'
             branch 'ft_jenkins'
@@ -81,10 +76,11 @@ pipeline {
             }
         }
         }
+    }
     stage('Deploy') {
         steps {
             echo 'Deploy'
         }
     }
-    }
   }
+}
