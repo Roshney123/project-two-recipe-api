@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: recipe-api
+specs:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-api
+    template:
+      containers:
+        - name: recpie-api-server
+          imagePullPolicy: Always
+          image: darylnauman/project-two-recipe-api:%TAG%
+          ports:
+            -containPorts: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recipe-api-service
+spec:
+  selector:
+    app: recipe-api
+  type: LoadBalancer
+  ports:
+    - port: 8000
+      targetPort: 80
