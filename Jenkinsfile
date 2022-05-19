@@ -83,7 +83,17 @@ pipeline {
             // branch 'ft_jenkins'
         }
         steps {
-            echo 'Deploy'
+            sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/recipe-api.deployment.yaml'
+            step[$class: 'KubernetesEngineBuilder',
+                projectID: 'project2',
+                clusterName: 'my-first-cluster-1',
+                zone: 'us-central1-c',
+                manifestPattern: 'k8s/',
+                credentials: 'project2',
+                verifyDeployments: true
+            ])
+
+            cleanWs();
         }
     }
   }
