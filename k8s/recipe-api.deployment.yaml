@@ -4,7 +4,7 @@ metadata:
   name: recipe-api
   labels:
     app: recipe-api
-specs:
+spec:
   replicas: 1
   selector:
     matchLabels:
