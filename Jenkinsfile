@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = 'darylnauman/project2'
+    registry = 'darylnauman/project-two-recipe-api'
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
@@ -58,6 +58,27 @@ pipeline {
                     dockerImage.push("latest")
                 }
             }
+        }
+    stage('Wait for approval')
+        when {
+            // branch 'main'
+            branch 'ft_jenkins'
+        }
+        steps {
+            script {
+            try {
+                timeout(time: 20, unit: 'MINUTES') {
+                    approved = input message: 'Deploy to production?', ok: 'Continue',
+                        parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy build to production')]
+
+                    if(approved != 'Yes') {
+                        error('Build did not pass approval')
+                    }
+                }
+            } catch(error) {
+                error('Build failed because timeout was exceeded');
+            }
+        }
         }
     }
   }
