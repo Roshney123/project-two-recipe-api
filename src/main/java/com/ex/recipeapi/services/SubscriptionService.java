@@ -32,6 +32,13 @@ public class SubscriptionService {
 
     Logger logger = LoggerFactory.getLogger(SubscriptionController.class);
 
+    
+    public SubscriptionService(SubscriptionRepository subscriptions, UserRepository userRepository) {
+        this.subscriptions = subscriptions;
+        this.userRepository = userRepository;
+    }
+
+
     /**
      * @return - all the subscribers from Subscription table
      */
@@ -49,7 +56,7 @@ public class SubscriptionService {
 
     public String subscribeForDailyEmail (int userId, Subscription s) {
 
-        logger.info("SubscriptionService - subscribeForDailyEmail");
+        logger.info("SubscriptionService - subscribeForDailyEmail"+userId);
         User u = userRepository.findById(userId);
 
         if (u.getIsLoggedIn() == 0) {
@@ -89,6 +96,7 @@ public class SubscriptionService {
             u.setSubscriptionStatus(0);
             String email = u.getEmail();
             Subscription subscriber = subscriptions.findByEmail(email);
+            logger.info("subscriber : "+subscriber);
             subscriptions.delete(subscriber);
             return "You have successfully unsubscribed from Daily Email.";
         } else {
@@ -136,7 +144,7 @@ public class SubscriptionService {
 
                 RestTemplate restTemplate = new RestTemplate();
 
-                String emailingAppUrl = "http://localhost:8080/email/sendEmail/" + emailAddress + "/" + id;
+                String emailingAppUrl = "http://localhost:7000/email/sendEmail/" + emailAddress + "/" + id;
                 ResponseEntity<String> emailResponse = restTemplate.getForEntity(emailingAppUrl, String.class);
 
                 return "Successfully sent email with this recipe!";
@@ -151,7 +159,7 @@ public class SubscriptionService {
 
     public String getRecipeById(int recipeId) {
 
-        logger.info("SubscriptionService - getRecipeById");
+        logger.info("SubscriptionService - getRecipeById " + recipeId);
 
         // Host url
         String host = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + recipeId + "/information";
