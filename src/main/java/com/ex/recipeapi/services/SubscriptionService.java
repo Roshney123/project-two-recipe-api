@@ -32,7 +32,7 @@ public class SubscriptionService {
 
     Logger logger = LoggerFactory.getLogger(SubscriptionController.class);
 
-    
+
     public SubscriptionService(SubscriptionRepository subscriptions, UserRepository userRepository) {
         this.subscriptions = subscriptions;
         this.userRepository = userRepository;
