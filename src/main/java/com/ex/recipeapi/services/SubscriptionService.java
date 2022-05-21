@@ -144,8 +144,13 @@ public class SubscriptionService {
 
                 RestTemplate restTemplate = new RestTemplate();
 
-//                String emailingAppUrl = "http://email-api/email/sendEmail/" + emailAddress + "/" + id;
-                String emailingAppUrl = "http://localhost:7000/email/sendEmail/" + emailAddress + "/" + id;
+                String emailApiUrl = System.getenv("EMAIL_API_URL");
+                System.out.println("emailApiUrl: " + emailApiUrl);
+
+                String emailingAppUrl = emailApiUrl + "/email/sendEmail/" + emailAddress + "/" + id;
+                System.out.println("emailingAppUrl: " + emailingAppUrl);
+
+//                String emailingAppUrl = "http://localhost:7000/email/sendEmail/" + emailAddress + "/" + id;
 //                String emailingAppUrl = "http://35.224.0.220:70/email/sendEmail/" + emailAddress + "/" + id;
 //                String emailingAppUrl = "http://email-api-service:70/email/sendEmail/" + emailAddress + "/" + id;
 
