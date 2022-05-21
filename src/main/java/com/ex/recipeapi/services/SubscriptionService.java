@@ -144,7 +144,11 @@ public class SubscriptionService {
 
                 RestTemplate restTemplate = new RestTemplate();
 
+//                String emailingAppUrl = "http://email-api/email/sendEmail/" + emailAddress + "/" + id;
                 String emailingAppUrl = "http://localhost:7000/email/sendEmail/" + emailAddress + "/" + id;
+//                String emailingAppUrl = "http://35.224.0.220:70/email/sendEmail/" + emailAddress + "/" + id;
+//                String emailingAppUrl = "http://email-api-service:70/email/sendEmail/" + emailAddress + "/" + id;
+
                 ResponseEntity<String> emailResponse = restTemplate.getForEntity(emailingAppUrl, String.class);
 
                 return "Successfully sent email with this recipe!";
