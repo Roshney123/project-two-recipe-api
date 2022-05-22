@@ -56,34 +56,34 @@ public class SubscriptionServiceTests {
     /**
      * Test if sendEmailForThisRecipe() is sending emails
      */
-    @Test
-    public void shouldSendEmailForThisRecipe() {
-
-        logger.info("Inside test - shouldSendEmailForThisRecipe()");
-
-        int userId = 1;
-        int recipeId = 479102;
-        User mockUser = new User();
-        mockUser.setUserId(userId);
-        mockUser.setEmail("anju.naduth@gmail.com");
-        mockUser.setUserPassword("testPassword");
-        mockUser.setSubscriptionStatus(1);
-        mockUser.setIsLoggedIn(1);
-
-        logger.info("userid : "+mockUser.getUserId());
-        logger.info("isLoggedIn : "+mockUser.getIsLoggedIn());
-
-        when(userRepository.findById(userId)).thenReturn(mockUser);
-
-        String message = subscriptionService.sendEmailForThisRecipe(userId, recipeId);
-
-        Assertions.assertNotNull(message);
-
-        logger.info("Message in shouldSendEmailForThisRecipe is: "+message);
-
-        Assertions.assertEquals("Successfully sent email with this recipe!", message, "Successfully sent email with this recipe!");
-
-    }
+//    @Test
+//    public void shouldSendEmailForThisRecipe() {
+//
+//        logger.info("Inside test - shouldSendEmailForThisRecipe()");
+//
+//        int userId = 1;
+//        int recipeId = 479102;
+//        User mockUser = new User();
+//        mockUser.setUserId(userId);
+//        mockUser.setEmail("anju.naduth@gmail.com");
+//        mockUser.setUserPassword("testPassword");
+//        mockUser.setSubscriptionStatus(1);
+//        mockUser.setIsLoggedIn(1);
+//
+//        logger.info("userid : "+mockUser.getUserId());
+//        logger.info("isLoggedIn : "+mockUser.getIsLoggedIn());
+//
+//        when(userRepository.findById(userId)).thenReturn(mockUser);
+//
+//        String message = subscriptionService.sendEmailForThisRecipe(userId, recipeId);
+//
+//        Assertions.assertNotNull(message);
+//
+//        logger.info("Message in shouldSendEmailForThisRecipe is: "+message);
+//
+//        Assertions.assertEquals("Successfully sent email with this recipe!", message, "Successfully sent email with this recipe!");
+//
+//    }
 
 
     /**
