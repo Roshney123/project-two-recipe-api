@@ -76,7 +76,7 @@ public class SubscriptionServiceTests {
 //        when(userRepository.findById(userId)).thenReturn(mockUser);
 //
 //        String message = subscriptionService.sendEmailForThisRecipe(userId, recipeId);
-//
+
 //        Assertions.assertNotNull(message);
 //
 //        logger.info("Message in shouldSendEmailForThisRecipe is: "+message);
@@ -84,6 +84,39 @@ public class SubscriptionServiceTests {
 //        Assertions.assertEquals("Successfully sent email with this recipe!", message, "Successfully sent email with this recipe!");
 //
 //    }
+
+
+    /**
+     * Test if sendEmailForThisRecipe() is sending emails if user not logged in
+     */
+    @Test
+    public void shouldNotSendEmailForThisRecipe_ifUserNotLoggedIn() {
+
+        logger.info("Inside test - shouldNotSendEmailForThisRecipe()");
+
+        int userId = 1;
+        int recipeId = 479102;
+        User mockUser = new User();
+        mockUser.setUserId(userId);
+        mockUser.setEmail("anju.naduth@gmail.com");
+        mockUser.setUserPassword("testPassword");
+        mockUser.setSubscriptionStatus(1);
+        mockUser.setIsLoggedIn(0);
+
+        logger.info("UserId:  "+mockUser.getUserId());
+        logger.info("isLoggedIn : "+mockUser.getIsLoggedIn());
+
+        when(userRepository.findById(userId)).thenReturn(mockUser);
+
+        String message = subscriptionService.sendEmailForThisRecipe(userId, recipeId);
+
+        Assertions.assertNotNull(message);
+
+        logger.info("Message in shouldNotSendEmailForThisRecipe is: "+message);
+
+        Assertions.assertEquals("Please SIGN UP or LOG IN to get email for this recipe", message, "SIGN UP or LOG IN to get email");
+
+    }
 
 
     /**
