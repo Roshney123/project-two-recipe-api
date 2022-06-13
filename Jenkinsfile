@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = 'darylnauman/project-two-recipe-api'
+    registry = 'Roshney123/project-two-recipe-api'
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
@@ -85,7 +85,7 @@ pipeline {
         steps {
             sh 'sed -i "s/%TAG%/$BUILD_NUMBER/g" ./k8s/recipe-api.deployment.yaml'
             step([$class: 'KubernetesEngineBuilder',
-                projectId: 'project2-350217',
+                projectId: 'total-practice-347523',
                 clusterName: 'my-first-cluster-1',
                 zone: 'us-central1-c',
                 manifestPattern: 'k8s/',
