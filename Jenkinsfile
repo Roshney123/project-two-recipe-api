@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = 'Roshney123/project-two-recipe-api'
+    registry = 'roshney123/project-two-recipe-api'
     dockerHubCreds = 'docker_hub'
     dockerImage = ''
   }
