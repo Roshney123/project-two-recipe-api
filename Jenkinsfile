@@ -31,8 +31,7 @@ pipeline {
     }
     stage('Docker Image') {
         when {
-            branch 'main'
-          
+            branch 'main'          
             // branch 'ft_jenkins'
         }
         steps{
